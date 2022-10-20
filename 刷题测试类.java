@@ -3,12 +3,34 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Test {
+public class 刷题测试类 {
 	public static void main(String[] args) {
 		System.out.println("开始");
 		// subsets(new int[] { 2, 3 });
-		去重(new int[] { 10, 1, 2, 7, 6, 1, 5 });
+		// 去重(new int[] { 10, 1, 2, 7, 6, 1, 5 });
 		// removeDuplicates(new int[] { 1, 1, 2, 5, 6, 7, 10 });
+		测试mathrandom的均衡性();
+	}
+
+	/**
+	 * 计算机中小数不是无穷的，是有限的
+	 */
+	private static void 测试mathrandom的均衡性() {
+		int count = 0;
+		for (int i = 0; i < 100000; i++) {
+			if ( Math.random() < 0.8) {
+				count++;
+			}
+		}
+		System.out.println((double) count / (double) 100000);
+		count = 0;
+		for (int i = 0; i < 100000; i++) {
+			if (Math.max(Math.random(), Math.random()) < 0.8) {
+				count++;
+			}
+		}
+		System.out.println((double) count / (double) 100000);
+
 	}
 
 	public static List<List<Integer>> subsets(int[] nums) {
