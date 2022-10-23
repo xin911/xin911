@@ -19,15 +19,14 @@ public class 单双链表的反转 {
 		Node tail = new Node(0);
 		Node kHead = tail;
 		Node next = null;
-		while (k > 0) {
+		while (k-- > 0) {
 			next = head.next;
 			head.next = kHead;
 			kHead = head;
 			head = next;
-			k--;
 		}
-		tail.val = head.val;
-		tail.next = head.next;
+		// tail.val = head.val;
+		// tail.next = head.next;
 		打印单链表节点(kHead);
 		打印单链表节点(head);
 		return kHead;

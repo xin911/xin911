@@ -16,21 +16,41 @@
  * }
  */
 class Solution {
+	/**
+	 * 递归子链表
+	 * 
+	 * @param head
+	 * @param k
+	 * @return
+	 */
 	public ListNode reverseKGroup(ListNode head, int k) {
-		ListNode result = new ListNode();
-		ListNode curr = new ListNode();
+		// 打印链表(head);
+		ListNode curr = head;
 		int cnt = 0;
-		while (head != null && cnt != k) {
-			head = head.next;
+		// 1->2->3->4->5->6->7->8->null
+		while (curr != null && cnt != k) {
+			curr = curr.next;
 			cnt++;
 		}
-
-		if (cnt < k){
-			// 说明k大于链表的长度
+		if (cnt < k) {
 			return head;
 		}
-		打印链表(result);
+		// 4->5->6->7->8->null
+		curr = reverseKGroup(curr, k);
+		ListNode result = 翻转链表(head, k, curr);
+		// 打印链表(result);
 		return result;
+	}
+
+	private ListNode 翻转链表(ListNode head, int k, ListNode curr) {
+		ListNode next = null;
+		while (k-- > 0) {
+			next = head.next;
+			head.next = curr;
+			curr = head;
+			head = next;
+		}
+		return curr;
 	}
 
 	private void 打印链表(ListNode head) {
@@ -38,42 +58,25 @@ class Solution {
 			System.out.print(head.val);
 			head = head.next;
 		}
-	}
-
-	private ListNode 翻转链表(ListNode head, int k) {
-		if (head == null) {
-			return new ListNode();
-		}
-		ListNode tail = new ListNode();
-		ListNode reverseHead = tail;
-		for (int i = 0; i < k; i++) {
-			ListNode next = head.next;
-			head.next = reverseHead;
-			reverseHead = head;
-			head = next;
-		}
-		tail.val = head.val;
-		tail.next = head.next;
-		return reverseHead;
-
+		System.out.println();
 	}
 }
 
-class ListNode {
-	int val;
-	ListNode next;
+// class ListNode {
+// int val;
+// ListNode next;
 
-	ListNode() {
-	}
+// ListNode() {
+// }
 
-	ListNode(int val) {
-		this.val = val;
-	}
+// ListNode(int val) {
+// this.val = val;
+// }
 
-	ListNode(int val, ListNode next) {
-		this.val = val;
-		this.next = next;
-	}
-}
+// ListNode(int val, ListNode next) {
+// this.val = val;
+// this.next = next;
+// }
+// }
 
 // @lc code=end
