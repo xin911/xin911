@@ -9,7 +9,21 @@ public class 刷题测试类 {
 		// subsets(new int[] { 2, 3 });
 		// 去重(new int[] { 10, 1, 2, 7, 6, 1, 5 });
 		// removeDuplicates(new int[] { 1, 1, 2, 5, 6, 7, 10 });
-		测试mathrandom的均衡性();
+		// 测试mathrandom的均衡性();
+		// 测试双重for循环的break(); // break只跳出单循环。
+		
+	}
+
+	private static void 测试双重for循环的break() {
+		for (int i = 0; i < 100; i++) {
+			for (int j = 0; j < 200; j++) {
+				if (j % 10 == 0) {
+					System.out.println("测试j:" + j);
+					break;
+				}
+			}
+			System.out.println("测试i:" + i);
+		}
 	}
 
 	/**
@@ -18,7 +32,7 @@ public class 刷题测试类 {
 	private static void 测试mathrandom的均衡性() {
 		int count = 0;
 		for (int i = 0; i < 100000; i++) {
-			if ( Math.random() < 0.8) {
+			if (Math.random() < 0.8) {
 				count++;
 			}
 		}
