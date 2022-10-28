@@ -1,4 +1,3 @@
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class 比较器 {
@@ -19,6 +18,6 @@ public class 比较器 {
 		}
 
 		// compareTo是字典顺序
-
+		
 	}
 }
