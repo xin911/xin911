@@ -11,22 +11,26 @@ import java.util.stream.Collectors;
 
 // @lc code=start
 class Solution {
-    public List<String> restoreIpAddresses(String s) {
-        if (Objects.isNull(s)) {
-            return new ArrayList<>();
-        }
+	public List<String> restoreIpAddresses(String s) {
+		if (Objects.isNull(s)) {
+			return new ArrayList<>();
+		}
 
-        List<String> results = new ArrayList<>();
-        List<String> result = new ArrayList<>();
-        backtrack(results, result, s.toCharArray(), 0);
-        return results;
-    }
+		List<List<String>> results = new ArrayList<>();
+		List<String> result = new ArrayList<>();
+		backtrack(results, result, s.toCharArray(), 0);
+		List<String> ips = results.stream().map(e -> e.stream().collect(Collectors.joining(".")))
+				.collect(Collectors.toList());
+		return ips;
+	}
 
-    public void backtrack(List<String> results, List<String> result, char[] digit, int start) {
-        
-        if (Character.isDigit(digit[start])) {
-
-        }
-    }
+	public void backtrack(List<List<String>> results, List<String> result, char[] digit, int start) {
+		results.add(result);
+		for (int i = start; i < digit.length; i++) {
+			result.add(String.valueOf(digit[i]));
+			backtrack(results, result, digit, start + 1);
+			result.remove(result.size() - 1);
+		}
+	}
 }
 // @lc code=end
