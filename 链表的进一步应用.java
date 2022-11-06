@@ -28,6 +28,7 @@ public class 链表的进一步应用 {
 		// 2、head1无环，head2无环，有交集
 		// 结论，head1和head2如果最后一个节点，不是同一个内存节点，那么一定不相交
 		// head1.tail != head2.tail那么一定不相交。
+		
 		return null;
 	}
 
