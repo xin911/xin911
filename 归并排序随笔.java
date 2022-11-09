@@ -17,23 +17,23 @@ public class 归并排序随笔 {
 		if (nums == null) {
 			return;
 		}
-		归并排序(nums, 0, nums.length - 1);
+		排序(nums, 0, nums.length - 1);
 	}
 
-	public static void 归并排序(int[] nums, int start, int end) {
+	public static void 排序(int[] nums, int start, int end) {
 		if (start == end) {
 			return;
 		}
 
 		// int middle = (start + end) >> 2;
 		int middle = start + ((end - start) >> 1);
-		归并排序(nums, start, middle);
-		归并排序(nums, middle + 1, end);
-		归并排序(nums, start, middle, end);
+		排序(nums, start, middle);
+		排序(nums, middle + 1, end);
+		归并(nums, start, middle, end);
 
 	}
 
-	public static void 归并排序(int[] nums, int start, int middle, int end) {
+	public static void 归并(int[] nums, int start, int middle, int end) {
 		int[] result = new int[end - start + 1];
 		int i = 0;
 		// 增加三指针 数组一般都要增加双指针的
