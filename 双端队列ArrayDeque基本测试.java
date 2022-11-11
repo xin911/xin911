@@ -47,8 +47,12 @@ public class 双端队列ArrayDeque基本测试 {
 		System.out.println(arrayDeque);// [20, 10, 40]
 		System.out.println(arrayDeque.pollFirst()); // 20
 		System.out.println(arrayDeque); // [10, 40]
-		arrayDeque.push(null);
-		System.out.println(arrayDeque); // [10, 40]
+		try {
+			arrayDeque.push(null);
+			System.out.println(arrayDeque); // [10, 40]
+		} catch (Exception e) {
+			System.err.println("push null 报错: " + e.getMessage());
+		}
 
 	}
 }
