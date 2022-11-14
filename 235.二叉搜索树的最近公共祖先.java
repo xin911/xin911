@@ -13,16 +13,13 @@ import java.util.Set;
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) { val = x; }
  * }
  */
 
-/**
- * 使用map，存储所有节点的父节点，然后分别将p和q的父节点链放入set中，如果存在交集就返回最近的公共节点
- */
 class Solution {
 	/**
 	 * @param root
@@ -31,11 +28,40 @@ class Solution {
 	 * @return
 	 */
 	public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-		// return 对数器(root, p, q);
-		return null;
+		if (root == null || root == p || root == q) {
+			return root;
+		}
+		if (p.val < root.val && q.val < root.val) {
+			return lowestCommonAncestor(root.left, p, q);
+		}
+		if (root.val < p.val && root.val < q.val) {
+			return lowestCommonAncestor(root.right, p, q);
+		}
+
+		return root;
+	}
+}
+
+// @lc code=end
+
+/**
+ * 
+ */
+class 二叉树最近的公共祖先 {
+	/**
+	 * 这种方法非常稳，还是很不错的
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		TreeNode root = new TreeNode(), p = new TreeNode(), q = new TreeNode();
+		对数器(root, p, q);
 	}
 
-	private TreeNode 对数器(TreeNode root, TreeNode p, TreeNode q) {
+	/**
+	 * 使用map，存储所有节点的父节点，然后分别将p和q的父节点链放入set中，如果存在交集就返回最近的公共节点
+	 */
+	private static TreeNode 对数器(TreeNode root, TreeNode p, TreeNode q) {
 		if (root == null || p == null || q == null) {
 			return null;
 		}
@@ -62,7 +88,7 @@ class Solution {
 		return null;
 	}
 
-	public void 遍历二叉树(Map<TreeNode, TreeNode> father, TreeNode head) {
+	public static void 遍历二叉树(Map<TreeNode, TreeNode> father, TreeNode head) {
 		if (head == null) {
 			return;
 		}
@@ -76,4 +102,3 @@ class Solution {
 		}
 	}
 }
-// @lc code=end
