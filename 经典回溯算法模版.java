@@ -14,6 +14,8 @@ public class 经典回溯算法模版 {
 		// 等长子数组全排列(new int[] { 1, 2, 3 }).forEach(System.out::println);
 		// System.out.println("====permuteUnique=");
 		// 等长排序子数组全排列去重(nums).forEach(System.out::println);
+
+		打印字符串全排列("12345");
 	}
 
 	/**
@@ -276,6 +278,37 @@ public class 经典回溯算法模版 {
 				combinationSum2(list, tempList, nums, remain - nums[i], i + 1);
 				tempList.remove(tempList.size() - 1);
 			}
+		}
+	}
+
+	/**
+	 * 从左往右的尝试行为：
+	 * 12345
+	 * 
+	 * fale
+	 * [, 1, 12, 123, 1234, 12345, 1235, 124, 1245, 125, 13, 134, 1345, 135, 14,
+	 * 145, 15, 2, 23, 234, 2345, 235, 24, 245, 25, 3, 34, 345, 35, 4, 45, 5]
+	 * true
+	 * [, 1, 12, 123, 1234, 12345, 2, 23, 234, 2345, 3, 34, 345, 4, 45, 5]
+	 * 
+	 * @param string
+	 */
+	private static void 打印字符串全排列(String string) {
+		List<String> results = new ArrayList<>();
+		int 限定位数 = 0;
+		打印字符串全排列(results, "", string.toCharArray(), 0, string.length(), false, 限定位数);
+		System.out.println(results);
+	}
+
+	private static void 打印字符串全排列(List<String> results, String string, char[] charArray, int start, int end,
+			boolean 是否连续, int 限定位数) {
+		if (限定位数 != 0 && string.length() > 限定位数) {
+			return;
+		}
+
+		results.add(string);
+		for (int i = start; i < charArray.length && (是否连续 ? (i < end) : true); i++) {
+			打印字符串全排列(results, string + charArray[i], charArray, i + 1, i + 2, 是否连续, 限定位数);
 		}
 	}
 }

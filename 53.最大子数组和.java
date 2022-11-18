@@ -22,10 +22,10 @@ class Solution {
 		int max = nums[0];
 		for (int i = 0; i < nums.length; i++) {
 			// 状态转移方程 dp[i]=max{nums[i],dp[i−1]+nums[i]}
-			max = Math.max(sum = sum + nums[i], max);
-			if (sum < 0) {
-				sum = 0;
-			}
+			max = Math.max(Math.max(sum = sum + nums[i], 0), max);
+			// if (sum < 0) {
+			// sum = 0;
+			// }
 		}
 
 		return max;
