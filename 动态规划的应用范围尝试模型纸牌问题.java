@@ -14,7 +14,7 @@ public class 动态规划的应用范围尝试模型纸牌问题 {
 		int[] nums = new int[] { 7, 1, 6, 10, 10, 2, 9 };
 		int result = 范围模型纸牌问题的错误解答(nums);
 		System.out.println("result错误解:" + result);
-		result = 范围模型纸牌问题(new int[] { 10, 1 });
+		result = 范围模型纸牌问题(new int[] { 7, 10, 1, 2 });
 		System.out.println("result正解:" + result);
 
 	}
@@ -67,8 +67,8 @@ public class 动态规划的应用范围尝试模型纸牌问题 {
 	}
 
 	/**
-	 * [10,1]
-	 * 
+	 * [ 7, 10,1, 2 ]
+	 * 不能通过遍历，因为遍历结果一定是最大的那个（A聪明 B傻）结果。ß
 	 * @param nums
 	 * @return
 	 */
@@ -81,18 +81,49 @@ public class 动态规划的应用范围尝试模型纸牌问题 {
 		return Math.max(先手摸牌(nums, 0, nums.length - 1), 后手摸牌(nums, 0, nums.length - 1));
 	}
 
+	/**
+	 * 终止条件：只剩下一张纸牌时，返回这张纸牌的数值大小
+	 * 
+	 * 当剩下的不止一张纸牌的情况时：
+	 * 因为作为先手，既可以摸走最左侧的牌，也可以摸走最右侧的牌，
+	 * 如果先以先手摸走左侧的牌，得到的最终数值，就是最左侧的牌值+以后手摸剩下的牌所获得的值
+	 * 如果先以先手摸走右侧的牌，得到的最终数值，就是最右侧的牌值+以后手摸剩下的牌所获得的值，
+	 * 题目有说摸牌的人都很聪明，所以他一定可以计算出这两种情况的较大值
+	 * 
+	 * @param nums
+	 * @param left
+	 * @param right
+	 * @return
+	 */
 	private static int 先手摸牌(int[] nums, int left, int right) {
 		if (left == right) {
 			return nums[left];
 		}
 
-		return Math.max(nums[left] + 后手摸牌(nums, left + 1, right), nums[right] + 后手摸牌(nums, left, right - 1));
+		int 摸左面的牌 = nums[left] + 后手摸牌(nums, left + 1, right);
+		int 摸右面的牌 = nums[right] + 后手摸牌(nums, left, right - 1);
+		return Math.max(摸左面的牌, 摸右面的牌);
 	}
 
+	/**
+	 * 终止条件：只剩一张牌时，此时作为后手是摸不到牌的，返回0
+	 * 当剩下的不止一张纸牌的情况时：作为后手，摸牌是受先手影响的，
+	 * 如果先手摸走了左侧的牌，后手只能从剩下的牌中以先手的形式做选择，
+	 * 如果先手摸走了右侧的牌，后手只能从剩下的牌中以先手的形式做选择。
+	 * 但是先手一定会计算好，让后手得到的牌值，一定是这两种情况中较小的那种。
+	 * 
+	 * @param nums
+	 * @param left
+	 * @param right
+	 * @return
+	 */
 	private static int 后手摸牌(int[] nums, int left, int right) {
 		if (left == right) {
 			return 0;
 		}
-		return Math.min(先手摸牌(nums, left + 1, right), 先手摸牌(nums, left, right - 1));
+		int 摸左面的牌 = 先手摸牌(nums, left + 1, right);
+		int 摸右面的牌 = 先手摸牌(nums, left, right - 1);
+		// 体现两位牌手都非常聪明。虽然B牌手尽力获取最大值的牌，但是A牌手会给B尽量小的“选择权”
+		return Math.min(摸左面的牌, 摸右面的牌);
 	}
 }
